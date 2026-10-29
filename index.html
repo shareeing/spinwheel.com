@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spin Wheel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><div><strong>Spin Wheel</strong><small>Putar, lihat keberuntunganmu.</small></div></div>
+      <div class="top-actions">
+        <button id="soundToggle" class="small-btn" type="button" aria-pressed="true">♫ Suara: ON</button>
+        <button id="resetAll" class="small-btn subtle" type="button">Reset</button>
+      </div>
+    </header>
+
+    <section class="layout">
+      <section class="wheel-panel panel">
+        <div class="section-heading"><div><p class="eyebrow">LET'S SPIN</p><h1>Siapa yang beruntung?</h1><p class="muted">Semua bagian roda ukurannya sama. Peluang diatur terpisah.</p></div><span class="live-pill"><i></i> SIAP</span></div>
+        <div id="wheelStage" class="wheel-stage">
+          <div class="wheel-wrap">
+            <div class="pointer" aria-hidden="true"></div>
+            <canvas id="wheel" width="720" height="720" aria-label="Roda undian"></canvas>
+            <div class="wheel-center">SPIN<span>THE WHEEL</span></div>
+          </div>
+          <button id="spinBtn" class="spin-btn" type="button">PUTAR RODA <span>↗</span></button>
+          <p id="status" class="status">Siap? Tekan tombol putar.</p>
+          <button id="fullscreenBtn" class="fullscreen-btn" type="button">⛶ Layar penuh</button>
+          <div id="celebration" class="celebration hidden" aria-live="polite">
+            <div id="confetti" class="confetti"></div>
+            <div class="result-card">
+              <div id="resultEmoji" class="result-emoji">🎁</div>
+              <h2 id="resultTitle">KAMU DAPAT HADIAH!</h2>
+              <p id="resultMessage">Keberuntunganmu lagi bagus banget!</p>
+              <div id="resultPrize" class="result-prize">Hadiah</div>
+              <button id="continueBtn" class="continue-btn" type="button">YEAY, LANJUT SPIN! ✨</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="panel entries-panel">
+          <div class="section-heading compact"><div><p class="eyebrow">DAFTAR HADIAH</p><h2>Isi roda</h2></div><span id="entryCount" class="count-pill">5 item</span></div>
+          <form id="addForm" class="add-row"><input id="entryName" maxlength="48" placeholder="Nama hadiah / nama orang..." autocomplete="off" required><select id="entryCategory" aria-label="Kategori hadiah"><option value="regular">Doorprize biasa</option><option value="mega">MegaPrize</option></select><button aria-label="Tambah item" type="submit">+</button></form>
+          <div class="bulk-row"><button id="bulkToggle" class="text-btn" type="button">+ Tambah banyak sekaligus</button><button id="shuffleBtn" class="text-btn" type="button">Acak urutan</button></div>
+          <div id="bulkArea" class="bulk-area hidden"><textarea id="bulkNames" rows="4" placeholder="Satu nama per baris&#10;Beng Beng&#10;Oreo&#10;Permen"></textarea><button id="bulkAdd" class="secondary-btn" type="button">Tambahkan semua</button></div>
+          <div class="category-block"><div class="category-title"><span class="category-dot mega-dot"></span>MegaPrize <small>Hadiah utama</small></div><div id="megaEntries" class="entries"></div></div><div class="category-block"><div class="category-title"><span class="category-dot regular-dot"></span>Doorprize biasa <small>Hadiah lainnya</small></div><div id="regularEntries" class="entries"></div></div>
+          <div class="footnote">Nama kembar boleh. Setiap baris tetap dihitung sebagai item terpisah.</div>
+        </section>
+        <section class="panel chance-panel">
+          <div class="section-heading compact"><div><p class="eyebrow">PENGATURAN</p><h2>Peluang hadiah</h2></div></div>
+          <p class="muted small">Atur bobot peluang di sini. Ukuran potongan roda tidak berubah.</p>
+          <div class="category-title chance-category"><span class="category-dot mega-dot"></span>MegaPrize</div><div id="megaChanceList" class="chance-list"></div><div class="category-title chance-category"><span class="category-dot regular-dot"></span>Doorprize biasa</div><div id="regularChanceList" class="chance-list"></div>
+          <div class="chance-footer"><span>Peluang berdasarkan bobot</span><button id="equalWeights" class="text-btn" type="button">Samakan semua</button></div>
+        </section>
+        <section class="panel history-panel">
+          <div class="section-heading compact"><div><p class="eyebrow">HASIL SEBELUMNYA</p><h2>Riwayat</h2></div><button id="clearHistory" class="text-btn" type="button">Hapus</button></div>
+          <label class="toggle-row"><span>Hapus hadiah setelah menang</span><input id="removeWinner" type="checkbox"><i></i></label>
+          <div id="history" class="history-list"><p class="empty">Belum ada hasil. Putar dulu!</p></div>
+          <div class="data-actions"><button id="exportBtn" class="secondary-btn" type="button">Ekspor data</button><label class="secondary-btn file-label">Impor data<input id="importFile" type="file" accept=".json,.txt,.csv"></label></div>
+        </section>
+      </aside>
+    </section>
+    <footer>SPIN WHEEL <span>•</span> Atur peluang sesukamu, roda tetap adil secara visual.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
